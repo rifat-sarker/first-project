@@ -1,23 +1,30 @@
 import mongoose from 'mongoose';
-import { Gurdian, LocalGurdian, Student, UserName } from './student.interface';
+import {
+  TGurdian,
+  TLocalGurdian,
+  TStudent,
+  StudentMethods,
+  StudentModel,
+  TUserName,
+} from './student.interface';
 import validator from 'validator';
 const { Schema, model } = mongoose;
 
 // sub schema -- for organizing the code
-const userSchema = new Schema<UserName>({
+const userSchema = new Schema<TUserName>({
   firstName: {
     type: String,
     required: [true, 'First name is required'],
     trim: true,
     maxlength: [20, "First name can't be more than 20 characters"],
-    validate: {
-      validator: function (value: string) {
-        const firstNamestr =
-          value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
-        return value === firstNamestr;
-      },
-      message: '{VALUE} is not in capitalize format',
-    },
+    // validate: {
+    //   validator: function (value: string) {
+    //     const firstNamestr =
+    //       value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    //     return value === firstNamestr;
+    //   },
+    //   message: '{VALUE} is not in capitalize format',
+    // },
   },
   middleName: { type: String, trim: true },
   lastName: {
@@ -31,7 +38,7 @@ const userSchema = new Schema<UserName>({
   },
 });
 
-const gurdianSchema = new Schema<Gurdian>({
+const gurdianSchema = new Schema<TGurdian>({
   fatherName: { type: String, trim: true, required: true },
   fatherOccupation: { type: String, required: true },
   fatherContactNo: { type: String, required: true },
@@ -40,14 +47,14 @@ const gurdianSchema = new Schema<Gurdian>({
   motherContactNo: { type: String, required: true },
 });
 
-const localGurdianSchema = new Schema<LocalGurdian>({
+const localGurdianSchema = new Schema<TLocalGurdian>({
   name: { type: String, trim: true, required: true },
   occupation: { type: String, required: true },
   contactNo: { type: String, required: true },
   address: { type: String, required: true },
 });
 
-const studentSchema = new Schema<Student>({
+const studentSchema = new Schema<TStudent, StudentModel, StudentMethods>({
   id: {
     type: String,
     required: [true, 'Student ID is required'],
@@ -69,10 +76,11 @@ const studentSchema = new Schema<Student>({
   email: {
     type: String,
     required: [true, 'Email is required'],
-    validate: {
-      validator: (value) => validator.isEmail(value),
-      message: '{VALUE} is not valid type email',
-    },
+    unique: true,
+    // validate: {
+    //   validator: (value) => validator.isEmail(value),
+    //   message: '{VALUE} is not valid type email',
+    // },
   },
   contactNo: {
     type: String,
@@ -116,4 +124,14 @@ const studentSchema = new Schema<Student>({
   },
 });
 
-export const StudentModel = model<Student>('Student', studentSchema);
+//creating static method
+
+
+//creating a custom instance method
+
+// studentSchema.methods.isUserExists = async function (id: string) {
+//   const isExistingUser = await Student.findOne({ id });
+//   return isExistingUser;
+// };
+
+export const Student = model<TStudent, StudentModel>('Student', studentSchema);
