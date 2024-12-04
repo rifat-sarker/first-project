@@ -1,4 +1,4 @@
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 export type TGurdian = {
   fatherName: string;
@@ -23,6 +23,7 @@ export type TLocalGurdian = {
 };
 export type TStudent = {
   id: string;
+  user: Types.ObjectId
   name: TUserName;
   gender: 'male' | 'female' | 'other';
   dateOfBirth?: string;
@@ -35,7 +36,6 @@ export type TStudent = {
   gurdian: TGurdian;
   localgurdian: TLocalGurdian;
   profileImg?: string;
-  isActive: 'active' | 'blocked';
 };
 
 // creating static
@@ -43,14 +43,3 @@ export interface StudentModel extends Model<TStudent> {
   isUserExists(id: string): Promise<TStudent | null>;
 }
 
-//creating an instance method
-
-// export type StudentMethods = {
-//   isUserExists(id: string): Promise<TStudent | null >;
-// };
-
-// export type StudentModel = Model<
-//   TStudent,
-//   Record<string, never>,
-//   StudentMethods
-// >;

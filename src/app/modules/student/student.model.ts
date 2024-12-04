@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
+
 import {
   TGurdian,
   TLocalGurdian,
   TStudent,
-  StudentMethods,
   StudentModel,
   TUserName,
 } from './student.interface';
@@ -17,14 +17,6 @@ const userSchema = new Schema<TUserName>({
     required: [true, 'First name is required'],
     trim: true,
     maxlength: [20, "First name can't be more than 20 characters"],
-    // validate: {
-    //   validator: function (value: string) {
-    //     const firstNamestr =
-    //       value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
-    //     return value === firstNamestr;
-    //   },
-    //   message: '{VALUE} is not in capitalize format',
-    // },
   },
   middleName: { type: String, trim: true },
   lastName: {
@@ -54,11 +46,17 @@ const localGurdianSchema = new Schema<TLocalGurdian>({
   address: { type: String, required: true },
 });
 
-const studentSchema = new Schema<TStudent, StudentModel, StudentMethods>({
+const studentSchema = new Schema<TStudent, StudentModel>({
   id: {
     type: String,
     required: [true, 'Student ID is required'],
     unique: true,
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    required: [true, 'User is required'],
+    unique: true,
+    ref: 'User',
   },
   name: {
     type: userSchema,
@@ -77,10 +75,6 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethods>({
     type: String,
     required: [true, 'Email is required'],
     unique: true,
-    // validate: {
-    //   validator: (value) => validator.isEmail(value),
-    //   message: '{VALUE} is not valid type email',
-    // },
   },
   contactNo: {
     type: String,
@@ -114,24 +108,30 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethods>({
     required: [true, 'Local guardian information is required'],
   },
   profileImg: { type: String },
-  isActive: {
-    type: String,
-    enum: {
-      values: ['active', 'blocked'],
-      message: '{VALUE} is not a valid status',
-    },
-    default: 'active', // Default status is active
-  },
 });
 
-//creating static method
+// virtual
+studentSchema.virtual('fullName').get(function () {
+  return this.name.firstName + this.name.middleName + this.name.lastName;
+});
 
 
-//creating a custom instance method
+studentSchema.pre('findOne', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
 
-// studentSchema.methods.isUserExists = async function (id: string) {
-//   const isExistingUser = await Student.findOne({ id });
-//   return isExistingUser;
-// };
+// [ {$match: { isDeleted : {  $ne: : true}}}   ,{ '$match': { id: '123456' } } ]
+
+studentSchema.pre('aggregate', function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
+  next();
+});
+
+//creating a custom static method
+studentSchema.statics.isUserExists = async function (id: string) {
+  const existingUser = await Student.findOne({ id });
+  return existingUser;
+};
 
 export const Student = model<TStudent, StudentModel>('Student', studentSchema);

@@ -35,6 +35,7 @@ const localGurdianValidationSchema = z.object({
 const studentValidationSchema = z.object({
   id: z.string().nonempty('Student ID is required'),
   name: userValidationSchema,
+  password: z.string().max(20),
   gender: z.enum(['male', 'female', 'other']),
   dateOfBirth: z.string().optional(),
   email: z
