@@ -38,7 +38,7 @@ export const createStudentValidationSchema = z.object({
     student: z.object({
       name: userValidationSchema,
       gender: z.enum(['male', 'female', 'other']),
-      dateOfBirth: z.date().optional(),
+      dateOfBirth: z.string().optional(),
       email: z
         .string()
         .email('Invalid email address')
@@ -54,7 +54,9 @@ export const createStudentValidationSchema = z.object({
       permanentAddress: z.string().nonempty('Permanent address is required'),
       gurdian: gurdianValidationSchema,
       localgurdian: localGurdianValidationSchema,
+      admissionSemester: z.string(),
       profileImg: z.string().optional(),
+      
     }),
   }),
 });

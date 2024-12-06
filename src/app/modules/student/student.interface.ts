@@ -23,7 +23,7 @@ export type TLocalGurdian = {
 };
 export type TStudent = {
   id: string;
-  user: Types.ObjectId
+  user: Types.ObjectId;
   name: TUserName;
   gender: 'male' | 'female' | 'other';
   dateOfBirth?: Date;
@@ -35,6 +35,7 @@ export type TStudent = {
   permanentAddress: string;
   gurdian: TGurdian;
   localgurdian: TLocalGurdian;
+  admissionSemester: Types.ObjectId;
   profileImg?: string;
 };
 
@@ -42,4 +43,3 @@ export type TStudent = {
 export interface StudentModel extends Model<TStudent> {
   isUserExists(id: string): Promise<TStudent | null>;
 }
-
