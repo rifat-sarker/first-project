@@ -28,7 +28,46 @@ const getSingleStudentFromDB = async (id: string) => {
 };
 
 const updateStudentIntoDB = async (id: string, payload: Partial<TStudent>) => {
-  const result = await Student.findOneAndUpdate({ id }, payload);
+  const {
+    name,
+    guardian,
+    localguardian: localgurdian,
+    ...remainingStudentData
+  } = payload;
+  const modifiedUpdateData: Record<string, unknown> = {
+    ...remainingStudentData,
+  };
+  /* 
+  guradian : {
+  fatherOccupation : "Teacher"
+  }
+  
+  guradian.fatherOccupation = "Teacher"
+  name.firstName = 'Rifat'
+  name.lastName = 'Sarker'
+  */
+
+  if (name && Object.keys(name).length) {
+    for (const [key, value] of Object.entries(name)) {
+      modifiedUpdateData[`name.${key}`] = value;
+    }
+  }
+  if (guardian && Object.keys(guardian).length) {
+    for (const [key, value] of Object.entries(guardian)) {
+      modifiedUpdateData[`guardian.${key}`] = value;
+    }
+  }
+  if (localgurdian && Object.keys(localgurdian).length) {
+    for (const [key, value] of Object.entries(localgurdian)) {
+      modifiedUpdateData[`localgurdian.${key}`] = value;
+    }
+  }
+
+  
+  const result = await Student.findOneAndUpdate({ id }, modifiedUpdateData, {
+    new: true,
+    runValidators: true,
+  });
   return result;
 };
 
@@ -60,9 +99,10 @@ const deleteStudentFromDB = async (id: string) => {
     await session.endSession();
 
     return deleteStudent;
-  } catch (error) {
+  } catch (err) {
     await session.abortTransaction();
     await session.endSession();
+    throw new Error('Failed to delete student');
   }
 };
 

@@ -33,8 +33,8 @@ export type TStudent = {
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
   presentAddress: string;
   permanentAddress: string;
-  gurdian: TGurdian;
-  localgurdian: TLocalGurdian;
+  guardian: TGurdian;
+  localguardian: TLocalGurdian;
   admissionSemester: Types.ObjectId;
   profileImg?: string;
   isDeleted: boolean;

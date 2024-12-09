@@ -30,7 +30,7 @@ const userSchema = new Schema<TUserName>({
   },
 });
 
-const gurdianSchema = new Schema<TGurdian>({
+const guardianSchema = new Schema<TGurdian>({
   fatherName: { type: String, trim: true, required: true },
   fatherOccupation: { type: String, required: true },
   fatherContactNo: { type: String, required: true },
@@ -39,7 +39,7 @@ const gurdianSchema = new Schema<TGurdian>({
   motherContactNo: { type: String, required: true },
 });
 
-const localGurdianSchema = new Schema<TLocalGurdian>({
+const localGuardianSchema = new Schema<TLocalGurdian>({
   name: { type: String, trim: true, required: true },
   occupation: { type: String, required: true },
   contactNo: { type: String, required: true },
@@ -99,12 +99,12 @@ const studentSchema = new Schema<TStudent, StudentModel>({
     type: String,
     required: [true, 'Permanent address is required'],
   },
-  gurdian: {
-    type: gurdianSchema,
+  guardian: {
+    type: guardianSchema,
     required: [true, 'Guardian information is required'],
   },
-  localgurdian: {
-    type: localGurdianSchema,
+  localguardian: {
+    type: localGuardianSchema,
     required: [true, 'Local guardian information is required'],
   },
   profileImg: { type: String },
@@ -118,8 +118,8 @@ const studentSchema = new Schema<TStudent, StudentModel>({
   },
   academicDepartment: {
     type: Schema.Types.ObjectId,
-    ref: 'AcademicDepartment'
-  }
+    ref: 'AcademicDepartment',
+  },
 });
 
 // virtual

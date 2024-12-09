@@ -15,7 +15,23 @@ const userValidationSchema = z.object({
     }),
 });
 
-const gurdianValidationSchema = z.object({
+const updateUserValidationSchema = z.object({
+  firstName: z
+    .string()
+    .max(20, "First name can't be more than 20 characters")
+    .nonempty('First name is required')
+    .optional(),
+  middleName: z.string().optional(),
+  lastName: z
+    .string()
+    .nonempty('Last name is required')
+    .refine((value) => /^[a-zA-Z]+$/.test(value), {
+      message: 'Last name is not valid',
+    })
+    .optional(),
+});
+
+const guardianValidationSchema = z.object({
   fatherName: z.string().nonempty('Father name is required'),
   fatherOccupation: z.string().nonempty('Father occupation is required'),
   fatherContactNo: z.string().nonempty('Father contact number is required'),
@@ -24,7 +40,7 @@ const gurdianValidationSchema = z.object({
   motherContactNo: z.string().nonempty('Mother contact number is required'),
 });
 
-const localGurdianValidationSchema = z.object({
+const localGuardianValidationSchema = z.object({
   name: z.string().nonempty('Local guardian name is required'),
   occupation: z.string().nonempty('Local guardian occupation is required'),
   contactNo: z.string().nonempty('Local guardian contact number is required'),
@@ -52,8 +68,8 @@ export const createStudentValidationSchema = z.object({
         .optional(),
       presentAddress: z.string().nonempty('Present address is required'),
       permanentAddress: z.string().nonempty('Permanent address is required'),
-      gurdian: gurdianValidationSchema,
-      localgurdian: localGurdianValidationSchema,
+      guardian: guardianValidationSchema,
+      localguardian: localGuardianValidationSchema,
       admissionSemester: z.string(),
       profileImg: z.string().optional(),
     }),
@@ -63,7 +79,7 @@ export const createStudentValidationSchema = z.object({
 export const updateStudentValidationSchema = z.object({
   body: z.object({
     student: z.object({
-      name: userValidationSchema,
+      name: updateUserValidationSchema,
       gender: z.enum(['male', 'female', 'other']).optional(),
       dateOfBirth: z.string().optional(),
       email: z
@@ -87,8 +103,8 @@ export const updateStudentValidationSchema = z.object({
         .string()
         .nonempty('Permanent address is required')
         .optional(),
-      gurdian: gurdianValidationSchema.optional(),
-      localgurdian: localGurdianValidationSchema.optional(),
+      guardian: guardianValidationSchema.optional(),
+      localgurdian: localGuardianValidationSchema.optional(),
       admissionSemester: z.string().optional(),
       profileImg: z.string().optional(),
     }),
@@ -96,5 +112,5 @@ export const updateStudentValidationSchema = z.object({
 });
 export const studentValidations = {
   createStudentValidationSchema,
-  updateStudentValidationSchema
+  updateStudentValidationSchema,
 };
