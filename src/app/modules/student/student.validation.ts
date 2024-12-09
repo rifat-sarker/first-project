@@ -56,11 +56,45 @@ export const createStudentValidationSchema = z.object({
       localgurdian: localGurdianValidationSchema,
       admissionSemester: z.string(),
       profileImg: z.string().optional(),
-      
     }),
   }),
 });
 
+export const updateStudentValidationSchema = z.object({
+  body: z.object({
+    student: z.object({
+      name: userValidationSchema,
+      gender: z.enum(['male', 'female', 'other']).optional(),
+      dateOfBirth: z.string().optional(),
+      email: z
+        .string()
+        .email('Invalid email address')
+        .nonempty('Email is required')
+        .optional(),
+      contactNo: z.string().nonempty('Contact number is required').optional(),
+      emergencyContactNo: z
+        .string()
+        .nonempty('Emergency contact number is required')
+        .optional(),
+      bloodGroup: z
+        .enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
+        .optional(),
+      presentAddress: z
+        .string()
+        .nonempty('Present address is required')
+        .optional(),
+      permanentAddress: z
+        .string()
+        .nonempty('Permanent address is required')
+        .optional(),
+      gurdian: gurdianValidationSchema.optional(),
+      localgurdian: localGurdianValidationSchema.optional(),
+      admissionSemester: z.string().optional(),
+      profileImg: z.string().optional(),
+    }),
+  }),
+});
 export const studentValidations = {
   createStudentValidationSchema,
+  updateStudentValidationSchema
 };

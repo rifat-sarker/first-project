@@ -112,6 +112,14 @@ const studentSchema = new Schema<TStudent, StudentModel>({
     type: Schema.Types.ObjectId,
     ref: 'AcademicSemester',
   },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
+  academicDepartment: {
+    type: Schema.Types.ObjectId,
+    ref: 'AcademicDepartment'
+  }
 });
 
 // virtual
