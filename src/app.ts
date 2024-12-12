@@ -14,8 +14,9 @@ app.use('/api/v1', router);
 app.use('/api/v1', router);
 
 const test = (req: Request, res: Response) => {
-  const a = 11;
-  res.send(a);
+  Promise.reject()
+  // const a = 11;
+  // res.send(a);
 };
 
 app.get('/', test);
