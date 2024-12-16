@@ -1,14 +1,15 @@
 {
-  "editor.fontFamily": "'Fira code', 'Courier New', monospace",
-  "editor.fontSize": 16,
-  "debug.console.fontSize": 16,
-  "terminal.integrated.fontSize": 16,
-  "chat.editor.fontSize": 16,
-  "markdown.preview.fontSize": 16,
-  "window.zoomLevel": 0.5,
-  "terminal.integrated.localEchoStyle": "dim",
-  "editor.fontLigatures": false,
-  "editor.codeActionsOnSave": {
-
-  }
+  "editor.fontFamily": "Fira code",
+  "editor.fontSize": 15,
+  "debug.console.fontSize": 15,
+  "terminal.integrated.fontSize": 15,
+  "chat.editor.fontSize": 15,
+  "markdown.preview.fontSize": 15,
+  "window.zoomLevel": 0,
+  "terminal.integrated.localEchoStyle": "bold",
+  "editor.fontLigatures": true,
+  "editor.codeActionsOnSave": {},
+  "editor.wordWrap": "on",
+  "editor.fontVariations": false,
+  "editor.fontWeight": "normal"
 }

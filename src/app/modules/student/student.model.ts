@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 import {
-  TGurdian,
-  TLocalGurdian,
+  TGuardian,
+  TLocalGuardian,
   TStudent,
   StudentModel,
   TUserName,
@@ -30,7 +30,7 @@ const userSchema = new Schema<TUserName>({
   },
 });
 
-const guardianSchema = new Schema<TGurdian>({
+const guardianSchema = new Schema<TGuardian>({
   fatherName: { type: String, trim: true, required: true },
   fatherOccupation: { type: String, required: true },
   fatherContactNo: { type: String, required: true },
@@ -39,7 +39,7 @@ const guardianSchema = new Schema<TGurdian>({
   motherContactNo: { type: String, required: true },
 });
 
-const localGuardianSchema = new Schema<TLocalGurdian>({
+const localGuardianSchema = new Schema<TLocalGuardian>({
   name: { type: String, trim: true, required: true },
   occupation: { type: String, required: true },
   contactNo: { type: String, required: true },
