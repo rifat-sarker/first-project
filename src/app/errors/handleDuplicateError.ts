@@ -1,4 +1,4 @@
-import { TErrorSources } from '../interface/error';
+import { TErrorSources } from '../face/error';
 
 const handleDuplicateCastError = (err: any) => {
   const match = err.message.match(/"([^"]*)"/);

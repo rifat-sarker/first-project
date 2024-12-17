@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { TUser } from './user.interface';
+import { TUser } from './user.face';
 import config from '../../config';
 import bcrypt from 'bcrypt';
 
@@ -8,7 +8,7 @@ const userSchema = new Schema<TUser>(
     id: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     password: {
       type: String,

@@ -4,13 +4,13 @@ import mongoose from 'mongoose';
 import config from '../../config';
 import AppError from '../../errors/AppError';
 import { Admin } from '../Admin/admin.model';
-import { TFaculty } from '../Faculty/faculty.interface';
+import { TFaculty } from '../Faculty/faculty.face';
 import { Faculty } from '../Faculty/faculty.model';
 import { AcademicDepartment } from '../academicDepartment/academicDepartment.model';
-import { TStudent } from '../student/student.interface';
+import { TStudent } from '../student/student.face';
 import { Student } from '../student/student.model';
 import { AcademicSemester } from './../academicSemester/academicSemester.model';
-import { TUser } from './user.interface';
+import { TUser } from './user.face';
 import { User } from './user.model';
 import {
   generateAdminId,

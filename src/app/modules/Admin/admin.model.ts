@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { AdminModel, TAdmin, TUserName } from './admin.interface';
+import { AdminModel, TAdmin, TUserName } from './admin.face';
 import { BloodGroup, Gender } from './admin.constant';
 
 const userNameSchema = new Schema<TUserName>({

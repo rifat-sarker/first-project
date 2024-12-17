@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { FacultyModel, TFaculty, TUserName } from './faculty.interface';
+import { FacultyModel, TFaculty, TUserName } from './faculty.face';
 import { BloodGroup, Gender } from './faculty.constant';
 
 const userNameSchema = new Schema<TUserName>({

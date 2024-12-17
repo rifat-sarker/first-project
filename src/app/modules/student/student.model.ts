@@ -6,7 +6,7 @@ import {
   TStudent,
   StudentModel,
   TUserName,
-} from './student.interface';
+} from './student.face';
 import validator from 'validator';
 const { Schema, model } = mongoose;
 

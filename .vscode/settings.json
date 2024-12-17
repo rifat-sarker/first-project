@@ -1,5 +1,5 @@
 {
-  "editor.fontFamily": "Fira code",
+  "editor.fontFamily": "Fira code, 'Courier New'",
   "editor.fontSize": 15,
   "debug.console.fontSize": 15,
   "terminal.integrated.fontSize": 15,
@@ -10,6 +10,6 @@
   "editor.fontLigatures": true,
   "editor.codeActionsOnSave": {},
   "editor.wordWrap": "on",
-  "editor.fontVariations": false,
-  "editor.fontWeight": "normal"
+  "editor.fontVariations": true,
+  "editor.fontWeight": "400"
 }
