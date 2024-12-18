@@ -34,6 +34,6 @@ export type TAdmin = {
   isDeleted: boolean;
 };
 
-export face AdminModel extends Model<TAdmin> {
-  isUserExists(id: string): Promise<TAdmin | null>;
+export interface AdminModel extends Model<TAdmin> {
+  isUserExists(id: string): Promise<TAdmin | null>
 }

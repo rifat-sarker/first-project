@@ -6,7 +6,7 @@ import {
   TStudent,
   StudentModel,
   TUserName,
-} from './student.face';
+} from './student.interface';
 import validator from 'validator';
 const { Schema, model } = mongoose;
 
@@ -103,7 +103,7 @@ const studentSchema = new Schema<TStudent, StudentModel>({
     type: guardianSchema,
     required: [true, 'Guardian information is required'],
   },
-  localguardian: {
+  localGuardian: {
     type: localGuardianSchema,
     required: [true, 'Local guardian information is required'],
   },

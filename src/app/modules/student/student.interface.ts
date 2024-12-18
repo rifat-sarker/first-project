@@ -42,6 +42,6 @@ export type TStudent = {
 };
 
 // creating static
-export face StudentModel extends Model<TStudent> {
+export interface StudentModel extends Model<TStudent> {
   isUserExists(id: string): Promise<TStudent | null>;
 }

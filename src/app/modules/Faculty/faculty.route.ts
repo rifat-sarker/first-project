@@ -5,6 +5,8 @@ import validateRequest from '../../middlewares/validateRequest';
 
 const router = express.Router();
 
+router.post('/create-faculty', FacultyControllers.createFaculty);
+
 router.get('/:id', FacultyControllers.getSingleFaculty);
 
 router.patch(
@@ -16,5 +18,4 @@ router.patch(
 router.delete('/:id', FacultyControllers.deleteFaculty);
 
 router.get('/', FacultyControllers.getAllFaculties);
-
 export const FacultyRoutes = router;

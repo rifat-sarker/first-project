@@ -5,7 +5,7 @@ import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 
 import { ZodError, ZodIssue } from 'zod';
-import { TErrorSources } from '../face/error';
+import { TErrorSources } from '../interface/error';
 import config from '../config';
 import handleZodError from '../errors/handleZodError';
 import handleValidationError from '../errors/handleValidationError';
@@ -64,13 +64,14 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   }
 
   // ultimate return
-  return res.status(statusCode).json({
+  res.status(statusCode).json({
     success: false,
     message,
     errorSources,
     err,
     stack: config.NODE_ENV === 'development' ? err?.stack : null,
   });
+  return;
 };
 
 export default globalErrorHandler;

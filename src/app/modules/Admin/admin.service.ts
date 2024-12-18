@@ -4,9 +4,9 @@ import mongoose from 'mongoose';
 import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../../errors/AppError';
 import { User } from '../user/user.model';
-import { TAdmin } from './admin.face';
 import { Admin } from './admin.model';
 import { AdminSearchableFields } from './admin.constant';
+import { TAdmin } from './admin.interface';
 
 const getAllAdminsFromDB = async (query: Record<string, unknown>) => {
   const adminQuery = new QueryBuilder(Admin.find(), query)

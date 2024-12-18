@@ -35,6 +35,6 @@ export type TFaculty = {
   isDeleted: boolean;
 };
 
-export face FacultyModel extends Model<TFaculty> {
+export interface FacultyModel extends Model<TFaculty> {
   isUserExists(id: string): Promise<TFaculty | null>;
 }
