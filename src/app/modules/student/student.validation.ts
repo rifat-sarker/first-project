@@ -107,6 +107,7 @@ export const updateStudentValidationSchema = z.object({
       localgurdian: localGuardianValidationSchema.optional(),
       admissionSemester: z.string().optional(),
       profileImg: z.string().optional(),
+      academicDepartment: z.string().optional(),
     }),
   }),
 });

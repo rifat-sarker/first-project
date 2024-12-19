@@ -7,9 +7,9 @@ const router = express.Router();
 
 // will call a controller func
 
-router.get('/', StudentController.getAllStudent);
+router.get('/', StudentController.getAllStudents);
 
-router.get('/:id', StudentController.getASingleStudent);
+router.get('/:id', StudentController.getSingleStudent);
 router.patch(
   '/:id',
   validateRequest(updateStudentValidationSchema),

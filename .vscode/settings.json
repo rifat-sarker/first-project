@@ -1,5 +1,5 @@
 {
-  "editor.fontFamily": "Fira code, 'Courier New'",
+  "editor.fontFamily": "Fira Code, Consolas, 'Courier New', monospace",
   "editor.fontSize": 15,
   "debug.console.fontSize": 15,
   "terminal.integrated.fontSize": 15,
