@@ -39,11 +39,11 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     statusCode = simplifiedError?.statusCode;
     message = simplifiedError?.message;
     errorSources = simplifiedError?.errorSources;
-  } else if (err?.code === 11000) {
-    const simplifiedError = handleDuplicateCastError(err);
-    statusCode = simplifiedError?.statusCode;
-    message = simplifiedError?.message;
-    errorSources = simplifiedError?.errorSources;
+    } else if (err?.code === 11000) {
+      const simplifiedError = handleDuplicateCastError(err);
+      statusCode = simplifiedError?.statusCode;
+      message = simplifiedError?.message;
+      errorSources = simplifiedError?.errorSources;
   } else if (err instanceof AppError) {
     statusCode = err?.statusCode;
     message = err.message;
