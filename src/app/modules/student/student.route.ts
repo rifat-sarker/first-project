@@ -3,12 +3,13 @@ import { StudentController } from './student.controller';
 import validateRequest from '../../middlewares/validateRequest';
 import { updateStudentValidationSchema } from './student.validation';
 import auth from '../../middlewares/auth';
+import { USER_ROLE } from '../user/user.constant';
 
 const router = express.Router();
 
 // will call a controller func
 
-router.get('/', StudentController.getAllStudents);
+router.get('/', auth(USER_ROLE.admin), StudentController.getAllStudents);
 
 router.get(
   '/:id',
