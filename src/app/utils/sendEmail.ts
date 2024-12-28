@@ -21,3 +21,5 @@ export const sendEmail = async (to: string, html: string) => {
     html,
   });
 };
+
+
